@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ToastAndroid} from 'react-native';
 import { Header } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -23,12 +23,13 @@ export default class WriteStoryScreen extends React.Component {
           'story': this.state.story,
           'date':firebase.firestore.Timestamp.now().toDate(),
         })
+        ToastAndroid.show("Story submitted successfully",ToastAndroid.SHORT);
     }
 
    render(){
        return(
            <ScrollView>
-                <View>
+                <KeyboardAvoidingView behavior = "padding" enabled>
                         <Header
                             backgroundColor= {'#3ec1d3'}
                             centerComponent= {{
@@ -81,7 +82,7 @@ export default class WriteStoryScreen extends React.Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                </View>
+                </KeyboardAvoidingView>
            </ScrollView>
        )
    }
