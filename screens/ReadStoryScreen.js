@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ToastAndroid} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ToastAndroid, FlatList} from 'react-native';
 import {SearchBar, Header} from 'react-native-elements';
 import db from '../config'
 
@@ -67,24 +67,16 @@ export default class ReadStoryScreen extends React.Component {
                     value={this.state.search}
                 />
 
-                <ScrollView>
-                {
-                  this.state.search === "" ? 
-                    this.state.allStories.map((item)=>(
-                      <View style={{borderColor:'#ff165d',borderWidth:2,padding:10,alignItems:'center',margin:30,backgroundColor:'yellow'}}>
-                        <Text style={{color:'#ff165d', fontWeight:'bold'}}>Title : {item.title}</Text>
-                        <Text style={{color:'#ff165d', fontWeight:'bold'}}>Author : {item.author}</Text>
-                      </View>
-                    ))
-                  :
-                  this.state.dataSource.map((item)=>(
+                <FlatList
+                  data = {this.state.search === "" ?  this.state.allStories: this.state.dataSource}
+                  renderItem = {({ item }) => (
                     <View style={{borderColor:'#ff165d',borderWidth:2,padding:10,alignItems:'center',margin:30,backgroundColor:'yellow'}}>
-                      <Text style={{color:'#ff165d', fontWeight:'bold'}}>Title : {item.title}</Text>
+                      <Text style={{color:'#ff165d', fontWeight:'bold'}}>Title: {item.title}</Text>
                       <Text style={{color:'#ff165d', fontWeight:'bold'}}>Author : {item.author}</Text>
                     </View>
-                  ))
-                }
-                </ScrollView> 
+                  )}
+                  keyExtractor = {(item, index) => index.toString()}
+                />  
             </View>
         )
     }
