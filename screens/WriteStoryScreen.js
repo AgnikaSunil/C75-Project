@@ -33,7 +33,7 @@ export default class WriteStoryScreen extends React.Component {
                         <Header
                             backgroundColor= {'#3ec1d3'}
                             centerComponent= {{
-                                text: 'Story Hub',
+                                text: 'Bedtime Stories',
                                 style: { color: '#f6f7d7', fontSize: 20, fontWeight: 'bold' },
                             }}
                         />
